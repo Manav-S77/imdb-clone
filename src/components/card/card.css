@@ -1,0 +1,116 @@
+.cards {
+    display: inline-block;
+    transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0.75rem;
+    cursor: pointer;
+    min-width: 200px;
+    width: 200px;
+    height: 300px;
+    z-index: 1;
+    border: 1px solid #2a2a2a;
+    background-color: #1a1a1a;
+}
+
+.cards:hover {
+    transform: scale(1.08) translateY(-6px);
+    z-index: 10;
+    border-color: #f5c518;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.8), 0 0 15px rgba(245, 197, 24, 0.25);
+}
+
+.cards__img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.25s ease;
+}
+
+.cards:hover .cards__img {
+    filter: brightness(0.85);
+}
+
+.cards__overlay {
+    position: absolute;
+    padding: 1rem;
+    bottom: 0px;
+    height: 290px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-end;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0) 100%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    box-sizing: border-box;
+}
+
+.cards__overlay:hover {
+    opacity: 1;
+}
+
+.card__title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.35rem;
+    color: #ffffff;
+    line-height: 1.25;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.card__runtime {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+    color: #cccccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card__rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #f5c518;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.card__rating i {
+    color: #f5c518;
+}
+
+.card__description {
+    font-style: normal;
+    font-size: 0.75rem;
+    line-height: 1.35;
+    color: #aaaaaa;
+    margin-bottom: 0.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Skeleton Loading */
+.cards--loading {
+    background-color: #1a1a1a;
+    border: 1px solid #282828;
+}
+
+.cards__skeleton {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite ease-in-out;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
