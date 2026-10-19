@@ -12,9 +12,11 @@ const Movie = () => {
     },[id])
 
     const getData = () => {
-        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_API_KEY}&language=en-US&page=1`)
-        .then(res => res.json())
-        .then(data => setMovie(data))
+        const apiKey = (import.meta.env.VITE_TMDB_API_KEY || '').trim();
+        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US&page=1`)
+            .then(res => res.json())
+            .then(data => setMovie(data))
+            .catch(err => console.error("Error fetching movie detail: ", err));
     }
 
     return (
@@ -79,7 +81,7 @@ const Movie = () => {
                     {
                         currentMovieDetail && currentMovieDetail.production_companies &&
                         currentMovieDetail.production_companies.map(company => (
-                            <>
+                            <React.Fragment key={company.id}>
                             {
                                 company.logo_path && 
                                 <span className="productionCOmpanyImage">
@@ -87,7 +89,7 @@ const Movie = () => {
                                     <span>{company.name}</span>
                                 </span>
                             }
-                            </>
+                            </React.Fragment>
                         ))
         
                     }

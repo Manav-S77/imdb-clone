@@ -11,10 +11,11 @@ const Home = () => {
   const { type } = useParams()
 
   useEffect(() => {
-    fetch('https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_TMDB_API_KEY}&language=en-US&page=1')
+    const apiKey = (import.meta.env.VITE_TMDB_API_KEY || '').trim();
+    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`)
       .then(res => res.json())
       .then(data => {
-        setpopularMovies(data.results);
+        setpopularMovies(data.results || []);
       })
       .catch(err => console.error("Error fetching data: ", err));
   }, []);

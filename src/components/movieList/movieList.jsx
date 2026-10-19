@@ -13,9 +13,11 @@ const MovieList = () => {
     }, [type])
 
     const getData = () => {
-        fetch(`https://api.themoviedb.org/3/movie/${type ? type : "popular"}?api_key=${import.meta.env.VITE_TMDB_API_KEY}&language=en-US`)
+        const apiKey = (import.meta.env.VITE_TMDB_API_KEY || '').trim();
+        fetch(`https://api.themoviedb.org/3/movie/${type ? type : "popular"}?api_key=${apiKey}&language=en-US`)
             .then(res => res.json())
-            .then(data => setMovieList(data.results))
+            .then(data => setMovieList(data.results || []))
+            .catch(err => console.error("Error fetching movie list: ", err));
     }
 
     return (
